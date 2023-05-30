@@ -1,90 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Chart from 'react-apexcharts';
 import styles from './LineChart.module.scss'
-import Chart from "react-apexcharts";
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
 function LineChart() {
-    return (
-        // <React.Fragment>
-        <div className={cx('wrapper')}>
-            <h2 className={cx('linechart_title')}>Bar Chart in ReactJS</h2>
-
-            <Chart
-                type="bar"
-                style={{ display: "block", width: '100%', height: '100%' }}
-                // width={1500}
-                // height={900}
-                series={[
-                    {
-                        name: "Social Media Subscriber",
-                        data: [6578, 6787, 3245, 9876, 2324, 5123, 2435],
-                    },
-                ]}
-                options={{
-                    // title: {
-                    //   text: "BarChar Developed by DevOps Team",
-                    //   style: { fontSize: 30 },
-                    // },
-
-                    // subtitle: {
-                    //   text: "This is BarChart Graph",
-                    //   style: { fontSize: 18 },
-                    // },
-
-                    colors: ["#6439ff"],
-                    theme: { mode: "light" },
-
-                    xaxis: {
-                        tickPlacement: "on",
-                        categories: [
-                            "Facebook",
-                            "Twitter",
-                            "Linkedin",
-                            "Instagram",
-                            "GitHub",
-                            "Stackoverflow",
-                            "Youtube",
-                        ],
-                        title: {
-                            text: "Social Media User",
-                            style: { color: "#6439ff", fontSize: 30 },
-                        },
-                    },
-
-                    yaxis: {
-                        labels: {
-                            formatter: (val) => {
-                                return `${val}`;
-                            },
-                            style: { fontSize: "15", colors: ["#6439ff"] },
-                        },
-                        title: {
-                            text: "User In (K)",
-                            style: { color: "#6439ff", fontSize: 15 },
-                        },
-                    },
-
-                    legend: {
-                        show: true,
-                        position: "right",
-                    },
-
-                    dataLabels: {
-                        formatter: (val) => {
-                            return `${val}`;
-                        },
-                        style: {
-                            colors: ["#f4f4f4"],
-                            fontSize: 15,
-                        },
-                    },
-                }}
-            ></Chart>
-        </div>
-        // </React.Fragment>
+    const [product, setProduct] = useState(
+        [
+            {
+                name: "T-shirt",
+                data: [234, 45, 67, 987, 345, 456, 87, 321, 45, 569, 76, 890]
+            },
+            {
+                name: "Shirt",
+                data: [562, 145, 267, 97, 45, 156, 87, 321, 845, 969, 706, 20]
+            },
+            {
+                name: "Jeans",
+                data: [1012, 345, 117, 697, 845, 56, 287, 1321, 1845, 469, 306, 120]
+            }
+        ]
     );
+
+    const [option, setOption] = useState(
+        {
+            chart: {
+                fontFamily: "nunito, sans-serif",
+            },
+
+            title: {
+                text: "Product sell in 2021",
+                style: { color: "#6439ff", fontSize: 15 },
+                align: "center"
+            },
+            xaxis: {
+                title: {
+                    text: "Product Sell in Months",
+
+                    style: { color: "#6439ff", fontSize: 20 },
+                },
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yaxis: {
+                title: { text: "Product in K", style: {color: "#6439ff", fontSize: 20} }
+            }
+        }
+    );
+
+    return (<React.Fragment>
+        <div className={cx('linechart')}>
+            <h2 className={cx('linechart_title')}>Line Chart in ReactJS</h2>
+
+            <Chart type='line'
+                style={{ display: "block", width: '100%' }}
+
+                // width={1490}
+                // height={900}
+                series={product}
+                options={option}
+            >
+            </Chart>
+
+        </div>
+    </React.Fragment>);
 }
 
 export default LineChart;

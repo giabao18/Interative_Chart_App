@@ -31,7 +31,7 @@ function PieChart() {
     // }, []);
 
     const studentMarks = [5, 6, 7, 8, 9, 10]
-    const studentSubject = ['writing', 'speaking', 'History', 'Math', 'Physics', 'HCM though']
+    const studentSubject = ['Writing', 'Speaking', 'History', 'Math', 'Physics', 'HCM though']
 
     return (
         <React.Fragment>
@@ -39,15 +39,25 @@ function PieChart() {
                 <h2 className={cx('piechart_title')}>Welcome to Piechart </h2>
                 <Chart
                     type="pie"
-                    style={{ display: "block", width: '60%', height: '60%' }}
+                    style={{ display: "block", width: '100%', height: '60%' }}
 
 
                     series={studentMarks}
 
                     options={{
+                        plotOptions: {
+                            pie: {
+                                customScale: 0.8    
+                            }
+                        },
+
+                        chart: {
+                            fontFamily: "nunito, sans-serif",
+                        },
+
                         title: {
                             text: "Student PieChart",
-                            style: { color: "#6439ff", fontSize: 15, textAlign: "center",},
+                            style: { color: "#6439ff", fontSize: 20, textAlign: "center", },
                             align: "center",
                         },
                         noData: { text: "Empty Data" },

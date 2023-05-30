@@ -14,60 +14,62 @@ function DonutChart() {
         <div className={cx('donutchart')}>
             <h2 className={cx('donutchart_title')}>Donut Chart in ReactJS</h2>
 
-            <div className={cx('donutchart_content')}>
-                <Chart
-                
-                    type="donut"
-                    style={{ display: "block", width: '60%', height: '60%' }}
+            <Chart
+                type="donut"
+                // style={{ display: "block", width: '100%', height: '60%', margin: '0 0 40px 20px' }}
 
-                    series={medal}
+                series={medal}
 
-                    options={{
-                        labels: countryNames,
-                        title: {
-                            text: "Medal Country Name",
-                            style: { color: "#6439ff", fontSize: 20 },
-                            align: "center",
-                        },
+                options={{
+                    chart: {
+                        fontFamily: "nunito, sans-serif",
+                    },
 
-                        legend: {
-                            show: true,
-                            position: "right",
-                            fontSize: "15px",
-                            fontWeight: "bold",
-                            height: "30px",
-                            labels: { color: "#6439ff"},
-                        },
+                    labels: countryNames,
+                    title: {
+                        text: "Medal Country Name",
+                        style: { color: "#6439ff", fontSize: 20 },
+                        align: "center",
+                    },
 
-                        plotOptions: {
-                            pie: {
-                                donut: {
-                                    labels: {
+                    legend: {
+                        show: true,
+                        position: "right",
+                        fontSize: "15px",
+                        fontWeight: "bold",
+                        height: "30px",
+                        labels: { color: "#6439ff" },
+                    },
+
+                    plotOptions: {
+                        pie: {
+                            customScale: 0.8,
+                            donut: {
+                                labels: {
+                                    show: true,
+                                    total: {
                                         show: true,
-                                        total: {
-                                            show: true,
-                                            showAlways: true,
-                                            //formatter: () => '343',
-                                            fontSize: 30,
-                                            color: '#6439ff',
-                                        }
+                                        showAlways: true,
+                                        //formatter: () => '343',
+                                        fontSize: 30,
+                                        color: '#6439ff',
                                     }
                                 }
                             }
-
-                        },
-
-                        dataLabels: {
-                            enabled: true,
                         }
 
+                    },
 
-                    }}
+                    dataLabels: {
+                        enabled: true,
+                    }
 
-                />
-            </div>
 
+                }}
+
+            />
         </div>
+
     )
 }
 

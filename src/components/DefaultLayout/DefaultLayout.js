@@ -6,7 +6,7 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-export default function Layout({ children }) {
+export default function DefaultLayout({ children }) {
     return (
         <div className={cx('Wrapper')}>
             <Sidebar />

@@ -5,17 +5,20 @@ import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-
+import { AuthContext } from "~/context/Authentication/authProvider";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../../context/darkModeContext";
+import { DarkModeContext } from "../../context/theme/darkModeContext";
 import { useContext } from "react";
 import styles from './sidebar.module.scss'
 import classNames from 'classnames/bind'
+import { auth } from "~/Firebase/config";
+import { Button } from "antd";
 
 const cx = classNames.bind(styles)
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+
   return (
     <div className={cx('sidebar')}>
       <div className={cx("top")}>
@@ -62,15 +65,18 @@ const Sidebar = () => {
             </li>
           </Link>
 
-            <p className={cx("title")}>USER</p>
-            <li>
-              <AccountCircleOutlinedIcon className={cx('icon')} />
-              <span>Profile</span>
-            </li>
-            <li>
-              <ExitToAppIcon className={cx('icon')} />
-              <span>Logout</span>
-            </li>
+          <p className={cx("title")}>USER</p>
+          <li>
+            <AccountCircleOutlinedIcon className={cx('icon')} />
+            <span>Profile</span>
+          </li>
+
+
+          {/* Logout */}
+          <li className={cx('logout') }>
+            <ExitToAppIcon className={cx('icon')} />
+            <span onClick={() => auth.signOut()}>Logout</span>
+          </li>
         </ul>
 
       </div>

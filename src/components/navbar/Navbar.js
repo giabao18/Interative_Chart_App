@@ -2,7 +2,7 @@ import "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { DarkModeContext } from "../../context/darkModeContext";
+import { DarkModeContext } from "../../context/theme/darkModeContext";
 import { useContext } from "react";
 
 const Navbar = () => {
@@ -26,9 +26,9 @@ const Navbar = () => {
               onClick={() => dispatch({ type: "TOGGLE" })}
             />
           </div>
-          
-        
-          
+
+
+
         </div>
       </div>
     </div>

@@ -1,55 +1,32 @@
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import List from "./pages/list/List";
-import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
-import { DarkModeContext } from "./context/darkModeContext";
-import Layout from "./components/DefaultLayout/DefaultLayout";
+import { DarkModeContext } from "./context/theme/darkModeContext";
+import DefaultLayout from "./components/defaultLayout/DefaultLayout";
 import { publicRoutes } from "./routes/routes";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import AuthProvider from "./context/Authentication/authProvider";
+import Login from "./pages/Login";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
     <Router>
-
-      <div className={darkMode ? "app dark" : "app"}>
-        {/* <BrowserRouter>
-        <Routes>
-          <Layout>
-            <Route path="/">
-               <Route index element={<Home />} /> */}
-        {/* <Route path="login" element={<Login />} />  */}
-        {/* <Route path="users">
-                <Route index element={<List />} />
-                <Route path=":userId" element={<Single />} />
-                <Route
-                  path="new"
-                  element={<New inputs={userInputs} title="Add New User" />}
-                />
-              </Route> */}
-        {/* <Route path="barchart" element={<Barchart/>} />
-              <Route path="products">
-                <Route index element={<List />} />
-                <Route path=":productId" element={<Single />} />
-                <Route
-                  path="new"
-                  element={<New inputs={productInputs} title="Add New Product" />}
-                />
-              </Route> */}
-        {/* </Route>
-          </Layout>
-        </Routes>
-      </BrowserRouter> */}
-
+      <AuthProvider>
+        <div className={darkMode ? "app dark" : "app"}>
           <Routes>
             {publicRoutes.map((route, index) => {
               const Page = route.component;
+              let Layout = DefaultLayout;
+
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = DefaultLayout;
+              }
 
               return (
                 <Route
@@ -64,7 +41,8 @@ function App() {
               );
             })}
           </Routes>
-      </div>
+        </div>
+      </AuthProvider>
     </Router>
 
   );
