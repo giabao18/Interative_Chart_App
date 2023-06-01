@@ -5,13 +5,13 @@ import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-import { AuthContext } from "~/context/Authentication/authProvider";
+import { AuthContext } from "~/context/authentication/authProvider";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/theme/darkModeContext";
 import { useContext } from "react";
 import styles from './sidebar.module.scss'
 import classNames from 'classnames/bind'
-import { auth } from "~/Firebase/config";
+import { auth } from "~/firebase/config";
 import { Button } from "antd";
 
 const cx = classNames.bind(styles)
@@ -31,10 +31,12 @@ const Sidebar = () => {
         <ul>
 
           <p className={cx("title")}>HOME</p>
-          <li>
-            <DashboardIcon className={cx("icon")} />
-            <span>Home</span>
-          </li>
+          <Link to='/' style={{textDecoration: "none"}}>
+            <li>
+              <DashboardIcon className={cx("icon")} />
+              <span>Home</span>
+            </li>
+          </Link>
 
           <p className={cx('title')}>CHART LIST</p>
           <Link to="/barchart " style={{ textDecoration: "none" }}>
@@ -73,7 +75,7 @@ const Sidebar = () => {
 
 
           {/* Logout */}
-          <li className={cx('logout') }>
+          <li className={cx('logout')}>
             <ExitToAppIcon className={cx('icon')} />
             <span onClick={() => auth.signOut()}>Logout</span>
           </li>

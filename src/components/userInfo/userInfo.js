@@ -2,7 +2,7 @@ import { Button, Typography, Avatar } from 'antd'
 import React, { useEffect, useContext } from 'react'
 import styles from './userInfo.module.scss'
 import classNames from 'classnames/bind'
-import { auth } from '~/Firebase/config'
+import { auth } from '~/firebase/config'
 import { AuthContext } from '~/Context/AuthProvider'
 
 const cx = classNames.bind(styles)

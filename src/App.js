@@ -1,4 +1,3 @@
-import Home from "./pages/home/Home";
 import New from "./pages/new/New";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -7,8 +6,9 @@ import { DarkModeContext } from "./context/theme/darkModeContext";
 import DefaultLayout from "./components/defaultLayout/DefaultLayout";
 import { publicRoutes } from "./routes/routes";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AuthProvider from "./context/Authentication/authProvider";
+import AuthProvider from "./context/authentication/authProvider";
 import Login from "./pages/Login";
+import Home from "./pages/home/Home";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);

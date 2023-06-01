@@ -2,8 +2,8 @@
 import React from 'react'
 import { Row, Col, Button, Typography, Checkbox, Form, Input } from 'antd'
 import classNames from 'classnames'
-import { serverTimestamp, query, auth, db, FacebookAuthProvider, signInWithPopup, getAdditionalUserInfo, collection, doc, getDoc, addDoc } from "~/Firebase/config.js"
-import { addDocument } from '~/Firebase/service'
+import { serverTimestamp, query, auth, db, FacebookAuthProvider, signInWithPopup, getAdditionalUserInfo, collection, doc, getDoc, addDoc } from "~/firebase/config.js"
+import { addDocument } from '~/firebase/service'
 import styles from './Login.module.scss'
 import { FacebookFilled, GoogleOutlined } from '@ant-design/icons';
 
@@ -17,6 +17,7 @@ export default function Login() {
     const onFinish = (values) => {
         console.log('Success:', values);
     };
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -27,8 +28,6 @@ export default function Login() {
 
         if (getAdditionalUserInfo(userCheck).isNewUser) {
             const { user, providerId } = userCheck
-
-
 
             addDocument('users', {
                 displayName: user.displayName,
@@ -93,7 +92,6 @@ export default function Login() {
                         <Form.Item
                             name="remember"
                             valuePropName="checked"
-
                         >
                             <Checkbox>Remember me</Checkbox>
                         </Form.Item>

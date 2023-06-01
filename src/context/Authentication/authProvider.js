@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 import { useNavigate } from 'react-router';
-import { auth, onAuthStateChanged } from "~/Firebase/config.js"
+import { auth, onAuthStateChanged } from "~/firebase/config.js"
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react';
 

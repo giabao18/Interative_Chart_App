@@ -1,7 +1,7 @@
 import { QuerySnapshot, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { cond } from "lodash";
 import { useState, useEffect } from "react";
-import { db, collection, where, query, orderBy } from "~/Firebase/config";
+import { db, collection, where, query, orderBy } from "~/firebase/config";
 
 
 const useFireStore = (collect, condition) => {
@@ -9,7 +9,7 @@ const useFireStore = (collect, condition) => {
     const [documents, setDocuments] = useState([])
     useEffect(() => {
         let collectionRef = query(collection(db, collect), orderBy("createdAt"))
-        
+
         if (condition) {
             if (!condition.compareValues || !condition.compareValues.length) {
                 setDocuments([])
