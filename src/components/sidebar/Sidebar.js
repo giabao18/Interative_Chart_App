@@ -1,10 +1,10 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+import { DatasetOutlined } from "@mui/icons-material";
 import { AuthContext } from "~/context/authentication/authProvider";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/theme/darkModeContext";
@@ -13,6 +13,7 @@ import styles from './sidebar.module.scss'
 import classNames from 'classnames/bind'
 import { auth } from "~/firebase/config";
 import { Button } from "antd";
+
 
 const cx = classNames.bind(styles)
 
@@ -31,7 +32,7 @@ const Sidebar = () => {
         <ul>
 
           <p className={cx("title")}>HOME</p>
-          <Link to='/' style={{textDecoration: "none"}}>
+          <Link to='/' style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className={cx("icon")} />
               <span>Home</span>
@@ -67,11 +68,13 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <p className={cx("title")}>USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className={cx('icon')} />
-            <span>Profile</span>
-          </li>
+          <Link to='/data' style={{ textDecoration: "none" }}>
+            <p className={cx("title")}>USER</p>
+            <li>
+              <DatasetOutlined className={cx('icon')} />
+              <span>Data</span>
+            </li>
+          </Link>
 
 
           {/* Logout */}

@@ -6,16 +6,18 @@ import PieChart from '~/pages/Chart/PieChart';
 import DonutChart from '~/pages/Chart/DonutChart';
 import LineChart from '~/pages/Chart/LineChart';
 import Login from '~/pages/Login';
-import loginLayout from '~/components/loginLayout/loginLayout';
+import LoginLayout from '~/components/loginLayout/loginLayout';
+import Data from '~/pages/Data/data';
 
 // Public routes
 const publicRoutes = [
     { path: '/', component: Home },
-    { path: '/login', component: Login, layout: loginLayout},
+    { path: '/login', component: Login, layout: LoginLayout},
     { path: '/barchart', component: BarChart },
     { path: '/piechart', component: PieChart},
     { path: '/donutchart', component: DonutChart},
     { path: '/linechart', component: LineChart},
+    { path: '/data', component: Data},
 
 ];
 

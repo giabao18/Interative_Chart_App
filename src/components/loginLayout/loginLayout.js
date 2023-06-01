@@ -5,7 +5,7 @@ import styles from './loginLayout.module.scss';
 
 const cx = classNames.bind(styles)
 
-export default function loginLayout() {
+export default function LoginLayout() {
     return (
         <div>
             <Login />

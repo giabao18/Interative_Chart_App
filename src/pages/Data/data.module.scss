@@ -1,0 +1,32 @@
+.chartList {
+  display: flex;
+  padding: 0;
+  margin: 30px 60px;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+
+  &_name {
+    width: 120px;
+    height: 25px;
+    padding: 5px 0;
+    align-items: center;
+    text-align: center;
+    font-size: medium;
+    font-weight: 600;
+    color: #6439ff;
+    border: solid thin rgb(214, 209, 209);
+    border-radius: 5px;
+  }
+
+  &_name:hover {
+    cursor: pointer;
+    background-color: #ece8ff;
+  }
+}
+
+.chartTable {
+  display: block;
+  width: 80%;
+  margin: 60px;
+}
