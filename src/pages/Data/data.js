@@ -3,11 +3,13 @@ import classNames from "classnames/bind";
 import { useContext, useEffect, useState } from "react";
 import { Button, Form } from "antd";
 import DataTable from "~/components/table/dataTable";
+import { AppContext } from "~/context/authentication/appProvider";
 
 const cx = classNames.bind(styles)
 
 
 export default function Data() {
+    const { setShowTableData, chartType, setChartType } = useContext(AppContext)
     const chartLists = [
         { id: 1, name: "Bar Chart",db: "BarChart"  },
         { id: 2, name: "Pie Chart",db: "PieChart" },
@@ -15,14 +17,15 @@ export default function Data() {
         { id: 4, name: "Line Chart",db: "LineChart" },
     ]
 
-    const [chartType, setChartType] = useState(1)
+    // const [chartType, setChartType] = useState(1)
 
     const handleChartType = (chartType) => {
         setChartType(chartType)
+        setShowTableData(false)
     }
 
     const chartForm = chartLists.find(chart => {
-        return chart.id == chartType;
+        return chart.db == chartType;
     })
 
 
@@ -31,13 +34,14 @@ export default function Data() {
             <div className={cx('wrapper')}>
                 <ul className={cx('chartList')}>
                     {chartLists.map((chart) =>
-                        <li className={cx('chartList_name')} key={chart.id} onClick={() => handleChartType(chart.id)}>
+                        <li className={cx('chartList_name')} key={chart.id} onClick={() => handleChartType(chart.db)}>
                             {chart.name}
                         </li>
                     )}
                 </ul>
                 <div className={cx('chartTable')}>
-                    <DataTable chart={chartForm.db} />
+                    {chartForm.name}
+                    <DataTable />
                 </div>
             </div>
 

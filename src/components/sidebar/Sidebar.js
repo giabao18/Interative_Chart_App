@@ -35,7 +35,7 @@ const Sidebar = () => {
           <Link to='/' style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className={cx("icon")} />
-              <span>Home</span>
+              <span>Add Data</span>
             </li>
           </Link>
 

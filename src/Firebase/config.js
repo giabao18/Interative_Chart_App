@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, getDocs, setDoc, addDoc, serverTimestamp, FieldValue, where, orderBy, query } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, connectDatabaseEmulator } from "firebase/database"
-import { getAuth, FacebookAuthProvider, signInWithPopup, onAuthStateChanged, getAdditionalUserInfo, connectAuthEmulator } from "firebase/auth";
+import { getAuth, FacebookAuthProvider,GoogleAuthProvider, signInWithPopup, onAuthStateChanged, getAdditionalUserInfo, connectAuthEmulator } from "firebase/auth";
 
 
 
@@ -37,7 +37,7 @@ const db = getFirestore(app);
 
 export {
     query, where, orderBy, db, collection, doc, getDocs, setDoc, addDoc,
-    auth, FacebookAuthProvider,
+    auth, FacebookAuthProvider,GoogleAuthProvider,
     signInWithPopup, onAuthStateChanged, getAdditionalUserInfo,
     FieldValue, serverTimestamp, getDatabase
 };  

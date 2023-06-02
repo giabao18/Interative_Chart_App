@@ -7,7 +7,7 @@ import { addDocument } from '~/firebase/service';
 export default function PieChartForm() {
 
   const handleSubmitData = () => {
-    addDocument('BarChart', { ...form.getFieldValue() })
+    addDocument('PieChart', { ...form.getFieldValue() })
     form.resetFields()
   }
 
@@ -15,26 +15,23 @@ export default function PieChartForm() {
   const onFinish = (values) => {
     console.log('Received values of form:', values);
   };
-  const handleChange = () => {
-    form.setFieldsValue({
-      sights: [],
-    });
-  };
+
 
   return (
     <div >
       <Form
         form={form}
-        name="BarChartForm"
+        name="PieChartForm"
         onFinish={onFinish}
         style={{
           maxWidth: 600,
         }}
         autoComplete="off"
       >
+
         <Form.Item
-          name="BarChartTitle"
-          label="BarChart Title"
+          name="Title"
+          label="Pie Chart Title"
           rules={[
             {
               required: true,
@@ -47,7 +44,7 @@ export default function PieChartForm() {
 
         <Form.Item
           name="xTitle"
-          label="xAxis Name"
+          label="Entity Name"
           rules={[
             {
               required: true,
@@ -60,7 +57,7 @@ export default function PieChartForm() {
 
         <Form.Item
           name="yTitle"
-          label="yAxis Name"
+          label="Entity Value"
           rules={[
             {
               required: true,
@@ -86,7 +83,7 @@ export default function PieChartForm() {
                     rules={[
                       {
                         required: true,
-                        message: 'Missing price',
+                        message: 'Missing data',
                       },
                     ]}
                   >
@@ -103,7 +100,7 @@ export default function PieChartForm() {
                     rules={[
                       {
                         required: true,
-                        message: 'Missing price',
+                        message: 'Missing data',
                       },
                     ]}
                   >

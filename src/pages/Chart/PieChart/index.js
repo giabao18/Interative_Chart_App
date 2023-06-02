@@ -1,53 +1,97 @@
 // please install npm install react-apexcharts apexcharts
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from 'react'
 import Chart from "react-apexcharts";
 import styles from './Piechart.module.scss'
 import classNames from 'classnames/bind';
+import { AppContext } from '~/context/authentication/appProvider';
+import useFireStoreCollection from '~/hook/useFireStoreCollection';
+import { Button, Form, Select, Space } from 'antd';
+
 
 const cx = classNames.bind(styles);
 
 
 function PieChart() {
-    // const [stdudentSubject, setStudentsubject] = useState([]);
-    // const [studentMarks, setStudentMarks] = useState([]);
 
-    // useEffect(() => {
-    //     const sSubject = [];
-    //     const sMarks = [];
-    //     const getStudentdata = async () => {
-    //         const reqData = await fetch("http://localhost/reactgraphtutorial/marks");
-    //         const resData = await reqData.json();
-    //         for (let i = 0; i < resData.length; i++) {
-    //             sSubject.push(resData[i].subject);
-    //             sMarks.push(parseInt(resData[i].marks));
-    //         }
-    //         setStudentsubject(sSubject);
-    //         setStudentMarks(sMarks);
-    //         //console.log(resData); 
-    //     }
+    const { setShowTableData, chartList, setChartType, chartTitleSelected, setChartTitleSelected } = useContext(AppContext)
 
-    //     getStudentdata();
+    const [drawChart, setDrawChart] = useState(false)
+    const [title, setTitle] = useState('')
+    const [xData, setxData] = useState([])
+    const [yData, setyData] = useState([])
 
-    // }, []);
+    useEffect(() => {
+        setChartType('PieChart');
+    })
 
-    const studentMarks = [5, 6, 7, 8, 9, 10]
-    const studentSubject = ['Writing', 'Speaking', 'History', 'Math', 'Physics', 'HCM though']
+    const handleDrawChart = () => {
+        const chartTitle = chartList.find((chart) => chart.id === chartTitleSelected)
 
+        const xDataTemp = []
+        const yDataTemp = []
+        setDrawChart(true)
+
+        setTitle(chartTitle.Title)
+
+        chartTitle.Data.forEach((data, index) => {
+            xDataTemp.push(data.x)
+
+            yDataTemp.push(Number(data.y))
+        })
+
+        setxData(xDataTemp)
+        setyData(yDataTemp)
+
+    }
+
+
+    const handleChangeChartTitle = (value) => {
+        setShowTableData(false)
+        setChartTitleSelected(value)
+    }
+
+    
     return (
         <React.Fragment>
             <div className={cx('wrapper')}>
+
                 <h2 className={cx('piechart_title')}>Welcome to Piechart </h2>
+
+                <Form style={{ margin: "60px" }}>
+                    <Form.Item>
+
+                        <Space>
+                            <Select
+                                // defaultValue={chartList[0].BarChartTitle}
+                                style={{
+                                    width: 200,
+                                }}
+                                onChange={handleChangeChartTitle}
+                                options={chartList.map((chart) => ({
+                                    label: chart.Title,
+                                    value: chart.id,
+                                }))}
+                            />
+                        </Space>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button onClick={handleDrawChart} >Draw Data</Button>
+                    </Form.Item>
+                </Form>
+
+
                 <Chart
                     type="pie"
                     style={{ display: "block", width: '100%', height: '60%' }}
 
 
-                    series={studentMarks}
+                    series={yData}
 
                     options={{
                         plotOptions: {
                             pie: {
-                                customScale: 0.8    
+                                customScale: 0.8
                             }
                         },
 
@@ -56,13 +100,13 @@ function PieChart() {
                         },
 
                         title: {
-                            text: "Student PieChart",
+                            text: title,
                             style: { color: "#6439ff", fontSize: 20, textAlign: "center", },
                             align: "center",
                         },
                         noData: { text: "Empty Data" },
                         colors: ["#6439ff", "#f0f"],
-                        labels: studentSubject
+                        labels: xData
 
                     }}
                 >

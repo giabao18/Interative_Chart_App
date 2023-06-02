@@ -10,6 +10,7 @@ import useFireStoreCollection from '~/hook/useFireStoreCollection';
 export const AppContext = createContext();
 
 export default function AppProvider({ children }) {
+    const [showTableData, setShowTableData] = useState(false)
     const [chartType, setChartType] = useState('BarChart');
     const [selectedChartID, setSelectedChartID] = useState('');
     const [chartTitleSelected, setChartTitleSelected] = useState('');
@@ -17,8 +18,9 @@ export default function AppProvider({ children }) {
 
     const chartList = useFireStoreCollection(chartType)
 
+
     return (
-        <AppContext.Provider value={{  setChartData, chartData, chartTitleSelected, setChartTitleSelected, chartList, chartType, setChartType }}>
+        <AppContext.Provider value={{showTableData, setShowTableData,  setChartData, chartData, chartTitleSelected, setChartTitleSelected, chartList, chartType, setChartType }}>
             {children}
         </AppContext.Provider>
     )

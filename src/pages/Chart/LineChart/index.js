@@ -1,11 +1,58 @@
-import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
 import styles from './LineChart.module.scss'
 import classNames from 'classnames/bind';
+import { AppContext } from '~/context/authentication/appProvider';
+import React, { useContext, useEffect, useState } from 'react'
+import { Button, Form, Select, Space } from 'antd';
+
 
 const cx = classNames.bind(styles);
 
 function LineChart() {
+
+    const { setShowTableData, chartList, setChartType, chartTitleSelected, setChartTitleSelected } = useContext(AppContext)
+
+    const [drawChart, setDrawChart] = useState(false)
+    const [title, setTitle] = useState('')
+    const [xAxisTitle, setxAxisTitle] = useState('')
+    const [yAxisTitle, setyAxisTitle] = useState('')
+    const [xAxis, setxAxis] = useState([])
+    const [finalData, setFinalData] = useState({})
+
+    useEffect(() => {
+        setChartType('LineChart');
+    })
+
+    const handleDrawChart = () => {
+        const chartTitle = chartList.find((chart) => chart.id === chartTitleSelected)
+
+        const finalDataTemp = []
+        setDrawChart(true)
+
+        setxAxisTitle(chartTitle.TitleOfx)
+        setyAxisTitle(chartTitle.TitleOfy)
+        setTitle(chartTitle.Title)
+        setxAxis(chartTitle.xTitle.split(' '))
+        console.log(xAxis)
+
+        chartTitle.Data.forEach((value) => {
+
+            finalDataTemp.push({
+                name: value.lineLabel,
+                data: value.lineValues.split(' ').map((string) => Number(string)),
+            })
+        })
+
+        console.log(finalDataTemp)
+        setFinalData(finalDataTemp)
+    }
+
+
+    const handleChangeChartTitle = (value) => {
+        setShowTableData(false)
+        setChartTitleSelected(value)
+    }
+
     const [product, setProduct] = useState(
         [
             {
@@ -23,44 +70,69 @@ function LineChart() {
         ]
     );
 
-    const [option, setOption] = useState(
-        {
-            chart: {
-                fontFamily: "nunito, sans-serif",
-            },
+    console.log(product)
 
-            title: {
-                text: "Product sell in 2021",
-                style: { color: "#6439ff", fontSize: 15 },
-                align: "center"
-            },
-            xaxis: {
-                title: {
-                    text: "Product Sell in Months",
-
-                    style: { color: "#6439ff", fontSize: 20 },
-                },
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yaxis: {
-                title: { text: "Product in K", style: {color: "#6439ff", fontSize: 20} }
-            }
-        }
-    );
 
     return (<React.Fragment>
         <div className={cx('linechart')}>
             <h2 className={cx('linechart_title')}>Line Chart in ReactJS</h2>
 
-            <Chart type='line'
-                style={{ display: "block", width: '100%' }}
+            <Form style={{ margin: "60px" }}>
+                <Form.Item>
 
-                // width={1490}
-                // height={900}
-                series={product}
-                options={option}
-            >
-            </Chart>
+                    <Space>
+                        <Select
+                            // defaultValue={chartList[0].BarChartTitle}
+                            style={{
+                                width: 200,
+                            }}
+                            onChange={handleChangeChartTitle}
+                            options={chartList.map((chart) => ({
+                                label: chart.Title,
+                                value: chart.id,
+                            }))}
+                        />
+                    </Space>
+                </Form.Item>
+
+                <Form.Item>
+                    <Button onClick={handleDrawChart} >Draw Data</Button>
+                </Form.Item>
+            </Form>
+
+            {
+                drawChart &&
+                <Chart type='line'
+                    style={{ display: "block", width: '100%' }}
+
+                    // width={1490}
+                    // height={900}
+                    series={finalData}
+                    options={{
+                        chart: {
+                            fontFamily: "nunito, sans-serif",
+                        },
+
+                        title: {
+                            text: title,
+                            style: { color: "#6439ff", fontSize: 15 },
+                            align: "center"
+                        },
+                        xaxis: {
+                            title: {
+                                text: xAxisTitle,
+
+                                style: { color: "#6439ff", fontSize: 20 },
+                            },
+                            categories: xAxis
+                        },
+                        yaxis: {
+                            title: { text: yAxisTitle, style: { color: "#6439ff", fontSize: 20 } }
+                        }
+                    }}
+                >
+                </Chart>
+            }
 
         </div>
     </React.Fragment>);

@@ -2,7 +2,7 @@
 import React from 'react'
 import { Row, Col, Button, Typography, Checkbox, Form, Input } from 'antd'
 import classNames from 'classnames'
-import { serverTimestamp, query, auth, db, FacebookAuthProvider, signInWithPopup, getAdditionalUserInfo, collection, doc, getDoc, addDoc } from "~/firebase/config.js"
+import { serverTimestamp, query, auth, db, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo, collection, doc, getDoc, addDoc } from "~/firebase/config.js"
 import { addDocument } from '~/firebase/service'
 import styles from './Login.module.scss'
 import { FacebookFilled, GoogleOutlined } from '@ant-design/icons';
@@ -11,6 +11,7 @@ import { FacebookFilled, GoogleOutlined } from '@ant-design/icons';
 const cx = classNames.bind(styles)
 const { Title } = Typography
 var fbProvider = new FacebookAuthProvider(auth);
+var ggProvider = new GoogleAuthProvider(auth)
 
 export default function Login() {
 
@@ -37,8 +38,25 @@ export default function Login() {
                 providerId: providerId
             })
         }
-
     }
+
+    const handleGgLogin = async () => {
+
+        const userCheck = await signInWithPopup(auth, ggProvider)
+        if (getAdditionalUserInfo(userCheck).isNewUser) {
+            const { user, providerId } = userCheck
+
+            addDocument('users', {
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                uid: user.uid,
+                providerId: providerId
+            })
+        }
+    }
+
+
     return (
         <div>
             <Row span={8} style={{ display: 'flex', justifyContent: 'center', margin: '100px 0 0 0 ' }}>
@@ -104,7 +122,7 @@ export default function Login() {
 
                         <Form.Item>
                             <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 20px 0 20px' }}>
-                                <Button icon={<GoogleOutlined />} >
+                                <Button icon={<GoogleOutlined />} onClick={() => handleGgLogin()}>
                                     Login by Google
                                 </Button >
 

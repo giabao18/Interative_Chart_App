@@ -31,8 +31,8 @@ export default function BarChartForm() {
         autoComplete="off"
       >
         <Form.Item
-          name="BarChartTitle"
-          label="BarChart Title"
+          name="Title"
+          label="Bar Chart Title"
           rules={[
             {
               required: true,
@@ -45,7 +45,7 @@ export default function BarChartForm() {
 
         <Form.Item
           name="xTitle"
-          label="xAxis Name"
+          label="x-Axis Name"
           rules={[
             {
               required: true,
@@ -58,7 +58,7 @@ export default function BarChartForm() {
 
         <Form.Item
           name="yTitle"
-          label="yAxis Name"
+          label="y-Axis Name"
           rules={[
             {
               required: true,
@@ -84,11 +84,11 @@ export default function BarChartForm() {
                     rules={[
                       {
                         required: true,
-                        message: 'Missing price',
+                        message: 'Missing data',
                       },
                     ]}
                   >
-                    <Input placeholder='Enter value' style={{ width: 225 }} />
+                    <Input placeholder='Enter value Name' style={{ width: 225 }} />
                   </Form.Item>
 
                   <Form.Item
@@ -101,7 +101,7 @@ export default function BarChartForm() {
                     rules={[
                       {
                         required: true,
-                        message: 'Missing price',
+                        message: 'Missing data',
                       },
                     ]}
                   >

@@ -3,44 +3,97 @@ import { Button, Form, Input, Select, Space, Radio, Divider, Table } from 'antd'
 import { AppContext } from "~/context/authentication/appProvider";
 import classNames from 'classnames/bind';
 import styles from "./dataTable.module.scss";
+import { data } from 'autoprefixer';
 
 const cx = classNames.bind(styles)
 
 
-export default function DataTable(chartTypeString) {
-    const { chartData, setChartData, chartList, chartType,
-            setChartType, chartTitleSelected, setChartTitleSelected } = useContext(AppContext)
-    const [showTable, setShowTable] = useState(false)
+export default function DataTable() {
+    const { showTableData, setShowTableData, chartData, setChartData, chartList, chartType,
+        setChartType, chartTitleSelected, setChartTitleSelected } = useContext(AppContext)
     const [columns, setColumns] = useState([])
 
     useEffect(() => {
-        setChartType(chartTypeString.chart)
     }, [chartType])
 
     const handleChangeChartTitle = (value) => {
-        setShowTable(false)
+        setShowTableData(false)
         setChartTitleSelected(value)
     }
 
     const handleShowTable = () => {
-        setShowTable(true)
-        const chartTitle = chartList.find((chart) => chart.id === chartTitleSelected)
+        if (chartTitleSelected != '') {
+            setShowTableData(true)
+            const chartTitle = chartList.find((chart) => chart.id === chartTitleSelected)
+            const list = []
 
-        setColumns([
-            { title: chartTitle.xTitle, dataIndex: 'x', render: (text) => <a>{text}</a>, },
-            { title: chartTitle.yTitle, dataIndex: 'y' }
-        ])
+            // for LineChart
 
-        const list = []
-        chartTitle.Data.forEach((data, index) => {
-            list.push({
-                ...data,
-                key: index,
-            })
-        })
-        console.log(list)
+            if (chartType !== 'LineChart') {
+                setColumns([
+                    { title: chartTitle.xTitle, dataIndex: 'x', render: (text) => <a>{text}</a>, },
+                    { title: chartTitle.yTitle, dataIndex: 'y' }
+                ])
 
-        setChartData(list)
+                chartTitle.Data.forEach((data, index) => {
+                    list.push({
+                        ...data,
+                        key: index,
+                    })
+                })
+                console.log(columns)
+                console.log(list)
+            }
+
+            else {
+                const tempData = []
+                const LineChartLabels = [{ title: 'Data Labels', dataIndex: 'DataLabels' }]
+
+                chartTitle.Data.forEach((data, index) => {
+                    LineChartLabels.push(
+                        {
+                            title: data.lineLabel,
+                            dataIndex: `value${index + 1}`,
+                        }
+                    )
+
+                    tempData.push(
+                        (data.lineValues.split(' ').map((value) => Number(value)))
+                    )
+                })
+                setColumns(LineChartLabels)
+                console.log(LineChartLabels)
+                const DataLabels = chartTitle.xTitle.split(' ')
+
+                DataLabels.forEach((label, index) => {
+                    const temps = []
+                    tempData.forEach((data) => {
+                        temps.push(data[index]);
+                    })
+
+                    var newStringArray = temps.map(String)
+                    const newArray = [label, ...newStringArray]
+                    const newArrayObject = newArray.map(function (value, index) {
+                        if (index === 0) {
+                            return { DataLabels: value }
+                        }
+                        else {
+                            var property = `value${index}`;
+                            var obj = {};
+                            obj[property] = value;
+                            return obj;
+                        }
+                    })
+                    var combinedObject = newArrayObject.reduce(function (result, currentObject) {
+                        return Object.assign(result, currentObject);
+                    }, {});
+                    list.push(combinedObject);
+                })
+
+            }
+
+            setChartData(list)
+        }
     }
 
 
@@ -72,7 +125,7 @@ export default function DataTable(chartTypeString) {
                             }}
                             onChange={handleChangeChartTitle}
                             options={chartList.map((chart) => ({
-                                label: chart.BarChartTitle,
+                                label: chart.Title,
                                 value: chart.id,
                             }))}
                         />
@@ -84,7 +137,7 @@ export default function DataTable(chartTypeString) {
                 </Form.Item>
             </Form>
             {
-                showTable &&
+                showTableData &&
                 <div className={cx('chartTitle_table')}>
 
                     <Divider />
