@@ -1,4 +1,70 @@
-.wrapper {
+.login {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  &_logo,
+  &_form {
+    // width: 50%;
     display: flex;
     justify-content: center;
+  }
+
+  &_logo {
+    width: 60%;
+  }
+
+  &_form {
+    width: 40%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  &_logo {
+    height: 100vh;
+    background: linear-gradient(
+      45deg,
+      #ffc843,
+      #6439ff,
+      #76ffd9,
+      #c1e738,
+    );
+    background-size: 300% 300%;
+    animation: color 20s linear infinite ;
+  }
+
+  &_logo_img {
+    display: flex;
+    align-items: center;
+  }
+
+  &_form_layout {
+    width: 50%;
+  }
+}
+
+.form_label {
+  font-size: 20px;
+  font-weight: 800;
+  color: #6439ff;
+}
+
+.form_label_small {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6439ff;
+}
+
+@keyframes color {
+  0%{
+    background-position: 0 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0 50%;
+  }
 }

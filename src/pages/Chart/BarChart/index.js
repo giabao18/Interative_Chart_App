@@ -58,7 +58,7 @@ function BarChart() {
   return (
     // <React.Fragment>
     <div className={cx('wrapper')}>
-      <h2 className={cx('barchart_title')}>Bar Chart in ReactJS</h2>
+      <h2 className={cx('barchart_title')}>Welcome to Bar Chart</h2>
 
       <Form style={{ margin: "60px" }}>
         <Form.Item>

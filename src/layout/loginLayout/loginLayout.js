@@ -7,7 +7,7 @@ const cx = classNames.bind(styles)
 
 export default function LoginLayout() {
     return (
-        <div>
+        <div classNames={cx('wrapper')}>
             <Login />
         </div>
     )

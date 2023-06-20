@@ -51,7 +51,7 @@ function DonutChart() {
 
     return (
         <div className={cx('donutchart')}>
-            <h2 className={cx('donutchart_title')}>Donut Chart in ReactJS</h2>
+            <h2 className={cx('donutchart_title')}>Welcome to Donut Chart</h2>
 
             <Form style={{ margin: "60px" }}>
                 <Form.Item>
@@ -78,8 +78,7 @@ function DonutChart() {
 
             <Chart
                 type="donut"
-                // style={{ display: "block", width: '100%', height: '60%', margin: '0 0 40px 20px' }}
-
+                style={{ display: "block", width: '70%', height: '60%' }}
                 series={yData}
 
                 options={{

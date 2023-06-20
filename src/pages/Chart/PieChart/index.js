@@ -83,7 +83,7 @@ function PieChart() {
 
                 <Chart
                     type="pie"
-                    style={{ display: "block", width: '100%', height: '60%' }}
+                    style={{ display: "block", width: '70%', height: '60%' }}
 
 
                     series={yData}

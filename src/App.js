@@ -3,13 +3,12 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/theme/darkModeContext";
-import DefaultLayout from "./components/defaultLayout/DefaultLayout";
+import DefaultLayout from "./layout/defaultLayout/DefaultLayout";
 import { publicRoutes } from "./routes/routes";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthProvider from "./context/authentication/authProvider";
-import Login from "./pages/Login";
-import Home from "./pages/home/Home";
 import AppProvider from "./context/authentication/appProvider";
+import { ConfigProvider } from "antd";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -35,9 +34,17 @@ function App() {
                     key={index}
                     path={route.path}
                     element={
-                      <Layout>
-                        <Page />
-                      </Layout>
+                      <ConfigProvider
+                        theme={{
+                          token: {
+                            colorPrimary: '#6439ff'
+                          }
+                        }}
+                      >
+                        <Layout>
+                          <Page />
+                        </Layout>
+                      </ConfigProvider>
                     }
                   />
                 );

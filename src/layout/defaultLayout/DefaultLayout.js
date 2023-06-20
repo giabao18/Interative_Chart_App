@@ -1,6 +1,6 @@
 import React from 'react'
-import Sidebar from '../sidebar/Sidebar'
-import Navbar from '../navbar/Navbar'
+import Sidebar from '~/components/sidebar/Sidebar'
+import Navbar from '~/components/navbar/Navbar'
 import styles from './DefaultLayout.module.scss'
 import classNames from 'classnames/bind'
 

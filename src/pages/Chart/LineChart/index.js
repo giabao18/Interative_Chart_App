@@ -75,7 +75,7 @@ function LineChart() {
 
     return (<React.Fragment>
         <div className={cx('linechart')}>
-            <h2 className={cx('linechart_title')}>Line Chart in ReactJS</h2>
+            <h2 className={cx('linechart_title')}>Welcome to Line Chart</h2>
 
             <Form style={{ margin: "60px" }}>
                 <Form.Item>
@@ -103,7 +103,7 @@ function LineChart() {
             {
                 drawChart &&
                 <Chart type='line'
-                    style={{ display: "block", width: '100%' }}
+                    style={{ display: "block", width: '90%' }}
 
                     // width={1490}
                     // height={900}
@@ -115,7 +115,7 @@ function LineChart() {
 
                         title: {
                             text: title,
-                            style: { color: "#6439ff", fontSize: 15 },
+                            style: { color: "#6439ff", fontSize: 30 },
                             align: "center"
                         },
                         xaxis: {

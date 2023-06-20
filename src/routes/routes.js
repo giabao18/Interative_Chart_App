@@ -6,7 +6,7 @@ import PieChart from '~/pages/Chart/PieChart';
 import DonutChart from '~/pages/Chart/DonutChart';
 import LineChart from '~/pages/Chart/LineChart';
 import Login from '~/pages/Login';
-import LoginLayout from '~/components/loginLayout/loginLayout';
+import LoginLayout from '../layout/loginLayout/loginLayout';
 import Data from '~/pages/Data/data';
 
 // Public routes

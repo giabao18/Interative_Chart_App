@@ -1,12 +1,12 @@
 
 import React from 'react'
-import { Row, Col, Button, Typography, Checkbox, Form, Input } from 'antd'
-import classNames from 'classnames'
+import { ColorPicker, Row, Col, Button, Typography, Checkbox, Form, Input } from 'antd'
+import classNames from 'classnames/bind'
 import { serverTimestamp, query, auth, db, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo, collection, doc, getDoc, addDoc } from "~/firebase/config.js"
 import { addDocument } from '~/firebase/service'
-import styles from './Login.module.scss'
 import { FacebookFilled, GoogleOutlined } from '@ant-design/icons';
-
+import { images } from '~/assets/index.js'
+import styles from './login.module.scss'
 
 const cx = classNames.bind(styles)
 const { Title } = Typography
@@ -58,19 +58,24 @@ export default function Login() {
 
 
     return (
-        <div>
-            <Row span={8} style={{ display: 'flex', justifyContent: 'center', margin: '100px 0 0 0 ' }}>
-                <Col span={8}>
-                    <Title style={{ textAlign: 'center', fontFamily: "nunito, sans-serif", fontWeight: 800, color: "#6439ff" }} level={3}>
-                        Interactive Chart App By GiaBao
+        <div className={cx('login')} >
+
+            <div className={cx('login_logo')}>
+                <div className={cx('login_logo_img')}>
+                    <img styles={{ maxWidth: '100px' }} src={images.logo} alt='logo' />
+                </div>
+            </div>
+
+
+            <div className={cx('login_form')}>
+                <div className={cx('login_form_layout')}>
+                    <Title style={{ textAlign: 'center', fontFamily: "nunito, sans-serif", fontWeight: 800, color: "#6439ff" ,margin: "0 0 40px 0"}} level={1}>
+                        Interactive Chart App
                     </Title>
 
                     <Form
                         name="basic"
-
-                        style={{
-                            maxWidth: 600,
-                        }}
+                        size='large'
                         initialValues={{
                             remember: true,
                         }}
@@ -82,7 +87,10 @@ export default function Login() {
 
 
                         <Form.Item
-                            label="Username"
+                            label={
+                                <p className={cx('form_label')}>UserName</p>
+                            }
+                            style={{ color: '#6439ff' }}
                             name="username"
                             rules={[
                                 {
@@ -95,7 +103,9 @@ export default function Login() {
                         </Form.Item>
 
                         <Form.Item
-                            label="Password"
+                            label={
+                                <p className={cx('form_label')}>Password</p>
+                            }
                             name="password"
                             rules={[
                                 {
@@ -111,7 +121,9 @@ export default function Login() {
                             name="remember"
                             valuePropName="checked"
                         >
-                            <Checkbox>Remember me</Checkbox>
+                            <Checkbox>
+                                {<p className={cx('form_label_small')}>Remember me</p>}
+                            </Checkbox>
                         </Form.Item>
 
                         <Form.Item>
@@ -134,8 +146,8 @@ export default function Login() {
 
 
                     </Form>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </div>
     )
 }
